@@ -1,4 +1,4 @@
-package br.com.cubosacademy.apyrestjava;
+package br.com.cubosacademy.apirestjava;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
