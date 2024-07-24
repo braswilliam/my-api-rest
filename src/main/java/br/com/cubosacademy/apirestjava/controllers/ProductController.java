@@ -17,7 +17,6 @@ public class ProductController {
 
     private final ProductRepository productRepository;
 
-    @Autowired
     public ProductController(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
@@ -30,4 +29,6 @@ public class ProductController {
         }
         return ResponseEntity.ok().body(products);
     }
+
+
 }
