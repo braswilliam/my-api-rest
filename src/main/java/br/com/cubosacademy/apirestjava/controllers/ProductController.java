@@ -1,39 +1,33 @@
 package br.com.cubosacademy.apirestjava.controllers;
 
-import java.util.List;
-
+import br.com.cubosacademy.apirestjava.models.Product;
 import br.com.cubosacademy.apirestjava.repositories.ProductRepository;
+import br.com.cubosacademy.apirestjava.exceptions.products.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.cubosacademy.apirestjava.models.Product;
-
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
-    ProductRepository ProductRepository;
+    private final ProductRepository productRepository;
 
-    //Exibir uma coleção de produtos;
-    @GetMapping("/products")
+    @Autowired
+    public ProductController(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    @GetMapping
     public ResponseEntity<List<Product>> findAll() {
-        List<Product> products = ProductRepository.findAll();
+        List<Product> products = productRepository.findAll();
         if (products.isEmpty()) {
-            return 
+            throw new ProductNotFoundException("No products found");
         }
         return ResponseEntity.ok().body(products);
     }
-
-    //Consultar um produto;
-    
-    //cadastrar um produto;
-    
-    //eidtar um produto;
-
-
 }
